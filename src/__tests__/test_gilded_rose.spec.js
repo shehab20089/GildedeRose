@@ -159,20 +159,51 @@ describe("Gilded Rose", function() {
   });
 
   // Sulfuras
-  // it("Sulfuras, sell-in < 0, quality = 80 ", function() {
-  //   const gildedRose = new Shop([ new Item("Sulfuras", -1,80 ) ]);
-  //   const items = gildedRose.updateQuality();
-  //   expect(items[0].name).to.equal("Sulfuras");
-  //   expect(items[0].sellIn).to.equal(-2);
-  //   expect(items[0].quality).to.equal(80);
-  // });
-  // it("Sulfuras, sell-in > 0, quality = 80 ", function() {
-  //   const gildedRose = new Shop([ new Item("Sulfuras", 11,80 ) ]);
-  //   const items = gildedRose.updateQuality();
-  //   expect(items[0].name).to.equal("Sulfuras");
-  //   expect(items[0].sellIn).to.equal(10);
-  //   expect(items[0].quality).to.equal(80);
-  // });
+  it("Sulfuras, sell-in < 0, quality = 80 ", function() {
+    const gildedRose = new Shop([ new Item("Sulfuras, Hand of Ragnaros", -1,80 ) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].name).to.equal("Sulfuras, Hand of Ragnaros");
+    expect(items[0].sellIn).to.equal(-1);
+    expect(items[0].quality).to.equal(80);
+  });
+  it("Sulfuras, sell-in > 0, quality = 80 ", function() {
+    const gildedRose = new Shop([ new Item("Sulfuras, Hand of Ragnaros", 11,80 ) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].name).to.equal("Sulfuras, Hand of Ragnaros");
+    expect(items[0].sellIn).to.equal(11);
+    expect(items[0].quality).to.equal(80);
+  });
+
+  //Conjured
+  it("Conjured, sell-in > 0, quality > 0", function() {
+    const gildedRose = new Shop([ new Item("Conjured", 11,45 ) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].name).to.equal("Conjured");
+    expect(items[0].sellIn).to.equal(10);
+    expect(items[0].quality).to.equal(43);
+  });
+  it("Conjured, sell-in < 0, quality > 0", function() {
+    const gildedRose = new Shop([ new Item("Conjured", -1,45 ) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].name).to.equal("Conjured");
+    expect(items[0].sellIn).to.equal(-2);
+    expect(items[0].quality).to.equal(43);
+  });
+  it("Conjured, sell-in < 0, quality = 1", function() {
+    const gildedRose = new Shop([ new Item("Conjured", -1,1 ) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].name).to.equal("Conjured");
+    expect(items[0].sellIn).to.equal(-2);
+    expect(items[0].quality).to.equal(0);
+  });
+  it("Conjured, sell-in < 0, quality = 0", function() {
+    const gildedRose = new Shop([ new Item("Conjured", -1,0 ) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].name).to.equal("Conjured");
+    expect(items[0].sellIn).to.equal(-2);
+    expect(items[0].quality).to.equal(0);
+  });
+
   
 
 });
